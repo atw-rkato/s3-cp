@@ -1,0 +1,30 @@
+[package]
+name = "s3-cp"
+description = "S3 bulk copy from csv formatted list (via stdin)."
+version = "1.0.0"
+edition = "2021"
+
+[profile.release]
+overflow-checks = true
+
+[dependencies]
+anyhow = "1.0.55"
+itertools = "0.10.3"
+num = "0.4.0"
+log = "0.4.14"
+env_logger = "0.9.0"
+clia-local-time = "0.2.1"
+tokio = { version = "1.17.0", features = ["full"] }
+futures = "0.3.21"
+serde = { version = "1.0.136", features = ["derive"] }
+clap = { version = "3.1.5", features = ["derive", "env"] }
+chrono = "0.4.19"
+
+aws-config = "0.8.0"
+aws-sdk-s3 = "0.8.0"
+percent-encoding = "2.1.0"
+
+csv = "1.1.6"
+
+[dev-dependencies]
+pretty_assertions = "1.1.0"
