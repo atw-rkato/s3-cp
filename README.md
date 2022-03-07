@@ -75,7 +75,7 @@ sample-src-bucket, Dir1/sample.txt, sample-dst-bucket
 ./dist/s3-cp --sync < sample.csv
 ```
 
-# 既知の不具合
+## 既知の不具合
 
 現在、S3へのリクエストの同時実行数が多すぎると一部リクエストが正常終了しない場合があります。  
 その場合は一旦下記のように`--max-pending` を指定し、同時実行数の上限を下げて再試行してみてください (初期値は128)。

@@ -11,6 +11,7 @@ use log::LevelFilter;
 
 use crate::runner::{RunConfig, RunResult, Runner};
 
+mod error;
 mod runner;
 
 const AWS_PROFILE_ENV_KEY: &str = "AWS_PROFILE";
