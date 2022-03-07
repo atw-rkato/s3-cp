@@ -1,7 +1,3 @@
-# #から始まる行は無視します。
-# コピー元のバケット, コピー元のオブジェクトキー, コピー先のバケット, コピー先のオブジェクトキー
 sample-src-bucket, sample.txt, sample-dst-bucket, sample-copy.txt
-# オブジェクトが階層構造になっている場合は/で繋ぎます。
 sample-src-bucket2, Dir1/Dir2/sample2.txt, sample-dst-bucket2, Dir3/Dir4/sample2.txt
-# コピー先のオブジェクトキーが未指定の場合、コピー元のオブジェクトキーと同じキーになります (以下の例ならば Dir1/sample.txt)。
-sample-src-bucket, Dir1/sample.txt, sample-dst-bucket
+sample-src-bucket,Dir1/sample.txt,sample-dst-bucket

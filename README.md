@@ -30,14 +30,34 @@ ls ./dist
 
 ## 入力データの準備
 
-以下の形式のCSVデータを用意します (区切り文字は「`,`」)
+以下の形式のCSVデータを用意します。  
+※ 区切り文字は「`,`」  
+※ フィールド間の空白は無視されます。
 
 - 1列目 ... コピー元のバケット
 - 2列目 ... コピー元のオブジェクトキー
 - 3列目 ... コピー先のバケット
 - 4列目 ... コピー先のオブジェクトキー
 
-CSVフォーマットの詳細については [sample.csv](sample.csv) も参照してください。
+### データ例
+
+通常 (コピー元のバケット, コピー元のオブジェクトキー, コピー先のバケット, コピー先のオブジェクトキー)
+
+```text
+sample-src-bucket, sample.txt, sample-dst-bucket, sample-copy.txt
+```
+
+オブジェクトが階層構造になっている場合は/で繋ぎます。
+
+```text
+sample-src-bucket2, Dir1/Dir2/sample2.txt, sample-dst-bucket2, Dir3/Dir4/sample2.txt
+```
+
+コピー先のオブジェクトキーが未指定の場合、コピー元のオブジェクトキーと同じキーになります (以下の例ならば Dir1/sample.txt)。
+
+```text
+sample-src-bucket, Dir1/sample.txt, sample-dst-bucket
+```
 
 ## 実行
 

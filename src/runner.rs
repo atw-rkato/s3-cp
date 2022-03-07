@@ -45,7 +45,6 @@ impl Runner {
         let mut rdr = csv::ReaderBuilder::new()
             .trim(Trim::All)
             .has_headers(false)
-            .comment(Some(b'#'))
             .from_reader(rdr);
 
         let copy_results = self.for_each_copy(rdr.deserialize()).await;
