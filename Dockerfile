@@ -1,4 +1,5 @@
 ARG BASE_IMAGE_TAG
+# https://hub.docker.com/r/joseluisq/rust-linux-darwin-builder
 FROM joseluisq/rust-linux-darwin-builder:${BASE_IMAGE_TAG}
 ENV CC="o64-clang"
 ENV CXX="o64-clang++"

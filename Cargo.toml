@@ -8,22 +8,31 @@ edition = "2021"
 overflow-checks = true
 
 [dependencies]
+# https://crates.io/crates/anyhow
 anyhow = "1.0.55"
-itertools = "0.10.3"
-num = "0.4.0"
+# https://crates.io/crates/log
 log = "0.4.14"
+# https://crates.io/crates/env_logger
 env_logger = "0.9.0"
-clia-local-time = "0.2.1"
+# https://crates.io/crates/tokio
 tokio = { version = "1.17.0", features = ["full"] }
+# https://crates.io/crates/futures
 futures = "0.3.21"
+# https://crates.io/crates/serde
 serde = { version = "1.0.136", features = ["derive"] }
+# https://crates.io/crates/clap
 clap = { version = "3.1.5", features = ["derive", "env"] }
+# https://crates.io/crates/chrono
 chrono = "0.4.19"
 
+# https://crates.io/crates/aws-config
 aws-config = "0.8.0"
+# https://crates.io/crates/aws-sdk-s3
 aws-sdk-s3 = "0.8.0"
+# https://crates.io/crates/percent-encoding
 percent-encoding = "2.1.0"
 
+# https://crates.io/crates/csv
 csv = "1.1.6"
 
 [dev-dependencies]
