@@ -1,11 +1,15 @@
+use std::fmt::Debug;
 use std::io;
 
-use anyhow::{bail, Result};
 use chrono::{Local, SecondsFormat};
 use csv::Trim;
 use futures::{stream, StreamExt};
 use percent_encoding::{utf8_percent_encode, NON_ALPHANUMERIC};
 use serde::Deserialize;
+
+use crate::error::Error;
+
+type Result<T> = core::result::Result<T, Error>;
 
 #[derive(Debug, Deserialize)]
 struct Record {
@@ -65,7 +69,7 @@ impl Runner {
         let rows = 1_u64..;
         let copy_results =
             stream::iter(rows.zip(record_parse_results)).map(|(row, parse_result)| async move {
-                let copy_result = match parse_result {
+                let parse_and_copy_result = match parse_result {
                     Ok(Record {
                         src_bucket,
                         src_object_key,
@@ -77,15 +81,13 @@ impl Runner {
                         self.copy_object(&src_input, dst_bucket, dst_object_key)
                             .await
                     }
-                    Err(e) => {
-                        bail!(e)
-                    }
+                    Err(e) => Err(Error::CSVParseError(e)),
                 };
 
-                if let Err(e) = &copy_result {
-                    log::error!("{row}: {e}");
+                if let Err(e) = &parse_and_copy_result {
+                    log::error!("{row}: {}", e.display());
                 }
-                copy_result
+                parse_and_copy_result
             });
 
         if self.config.sync || self.config.max_pending <= 1 {
@@ -121,8 +123,10 @@ impl Runner {
             .bucket(dst_bucket)
             .key(dst_object_key);
 
-        copy_object_request.send().await?;
-
-        Ok(())
+        if let Err(e) = copy_object_request.send().await {
+            Err(Error::S3CopyError(e))
+        } else {
+            Ok(())
+        }
     }
 }
